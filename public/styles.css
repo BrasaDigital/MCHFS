@@ -185,14 +185,22 @@ a { color: var(--indigo); }
    (pasta "Tecidos Africanos"), com véu na cor do papel por cima
    para manter o texto legível — não é mais um padrão desenhado. */
 .hero-decorated {
-  background:
-    linear-gradient(rgba(251, 243, 231, 0.55), rgba(251, 243, 231, 0.72)),
-    url('/assets/fabric-circles.jpg') center / cover no-repeat;
+  background: url('/assets/fabric-circles.jpg') center / cover no-repeat;
 }
 
 .hero .container {
   border-left: 3px solid var(--amber);
   padding-left: 24px;
+}
+
+/* o tecido fica visível no resto da faixa, mas o texto fica sobre um
+   painel sólido — isso é o que estava difícil de ler antes: o padrão
+   do tecido por trás das letras. Só .hero-decorated ganha o painel;
+   o .hero simples (telas internas) fica como estava. */
+.hero-decorated .container {
+  background: var(--paper);
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 
 .hero h1 {
@@ -591,12 +599,21 @@ body.has-picker { background: var(--indigo); }
   /* Fundo: foto real de tecido africano (pasta "Tecidos Africanos"),
      com véu índigo por cima para manter os botões de idioma legíveis —
      é a mesma foto usada em .hero-decorated, em tom escuro aqui. */
-  background:
-    linear-gradient(180deg, rgba(31, 58, 68, 0.6), rgba(20, 38, 45, 0.78)),
-    url('/assets/fabric-wave.jpg') center / cover no-repeat;
+  background: url('/assets/fabric-wave.jpg') center / cover no-repeat;
 }
 
-.picker .container { text-align: center; border-left: none; padding-left: 20px; }
+/* o tecido cobre a tela toda; o conteúdo fica sobre um painel sólido
+   (mesmo problema do .hero-decorated: texto direto sobre o padrão
+   do tecido ficava difícil de ler). */
+.picker .container {
+  text-align: center;
+  border-left: none;
+  padding: 36px 28px;
+  max-width: 420px;
+  background: var(--indigo-deep);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+}
+
 .picker h1 { color: var(--paper); }
 .picker p { color: #cfd9db; margin: 0 auto 26px; }
 
