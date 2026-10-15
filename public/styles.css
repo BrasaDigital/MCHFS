@@ -61,10 +61,10 @@ a { color: var(--indigo); }
 /* faixa decorativa geométrica (ver public/assets/kente-strip.svg) —
    usada com moderação em 3 pontos: cabeçalho, rodapé e certificado */
 .kente-strip {
-  height: 6px;
+  height: 14px;
   background-image: url('/assets/kente-strip.svg');
   background-repeat: repeat-x;
-  background-size: 64px 6px;
+  background-size: 64px 14px;
 }
 
 .nav-bar {
@@ -176,6 +176,14 @@ a { color: var(--indigo); }
   padding: 52px 0 40px;
   border-bottom: 1px solid var(--line);
   position: relative;
+}
+
+/* usada só nas páginas institucionais públicas (About, Meet Mentors,
+   Programme, Resources, Contact) — mais presença visual antes do
+   login, sem aplicar a mesma textura às telas internas do app. */
+.hero-decorated {
+  background: var(--paper) url('/assets/kente-pattern-light.svg') repeat;
+  background-size: 140px 140px;
 }
 
 .hero .container {
@@ -574,7 +582,8 @@ body.has-picker { background: var(--indigo); }
   min-height: 100svh; /* altura de viewport "estável" — evita faixa em branco abaixo quando a barra do navegador móvel recolhe/expande */
   display: flex;
   align-items: center;
-  background: var(--indigo);
+  background: var(--indigo) url('/assets/kente-pattern-dark.svg') repeat;
+  background-size: 140px 140px;
 }
 
 .picker .container { text-align: center; border-left: none; padding-left: 20px; }
@@ -635,8 +644,8 @@ body.has-picker { background: var(--indigo); }
 
 .certificate-sheet .kente-strip {
   margin: -44px -36px 28px;
-  background-size: 48px 8px;
-  height: 8px;
+  background-size: 48px 10.5px;
+  height: 10.5px;
 }
 
 .certificate-sheet-compact { margin-top: 24px; }
