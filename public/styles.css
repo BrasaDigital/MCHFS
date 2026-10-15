@@ -180,10 +180,14 @@ a { color: var(--indigo); }
 
 /* usada só nas páginas institucionais públicas (About, Meet Mentors,
    Programme, Resources, Contact) — mais presença visual antes do
-   login, sem aplicar a mesma textura às telas internas do app. */
+   login, sem aplicar a mesma textura às telas internas do app.
+   Fundo: foto real de tecido africano fornecida pela equipa MCHFS
+   (pasta "Tecidos Africanos"), com véu na cor do papel por cima
+   para manter o texto legível — não é mais um padrão desenhado. */
 .hero-decorated {
-  background: var(--paper) url('/assets/kente-pattern-light.svg') repeat;
-  background-size: 140px 140px;
+  background:
+    linear-gradient(rgba(251, 243, 231, 0.86), rgba(251, 243, 231, 0.86)),
+    url('/assets/fabric-kente.jpg') center / cover no-repeat;
 }
 
 .hero .container {
@@ -582,8 +586,12 @@ body.has-picker { background: var(--indigo); }
   min-height: 100svh; /* altura de viewport "estável" — evita faixa em branco abaixo quando a barra do navegador móvel recolhe/expande */
   display: flex;
   align-items: center;
-  background: var(--indigo) url('/assets/kente-pattern-dark.svg') repeat;
-  background-size: 140px 140px;
+  /* Fundo: foto real de tecido africano (pasta "Tecidos Africanos"),
+     com véu índigo por cima para manter os botões de idioma legíveis —
+     é a mesma foto usada em .hero-decorated, em tom escuro aqui. */
+  background:
+    linear-gradient(180deg, rgba(31, 58, 68, 0.88), rgba(20, 38, 45, 0.93)),
+    url('/assets/fabric-wave.jpg') center / cover no-repeat;
 }
 
 .picker .container { text-align: center; border-left: none; padding-left: 20px; }
