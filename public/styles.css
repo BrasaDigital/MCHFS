@@ -35,6 +35,11 @@ body {
   font-size: 17px;
 }
 
+/* seletor de idioma de página inteira: html e body precisam de altura
+   explícita para que min-height: 100% do .picker tenha algo a resolver —
+   sem isso sobra uma faixa em branco abaixo em navegadores móveis */
+html.has-picker, body.has-picker { height: 100%; background: var(--indigo); }
+
 img { max-width: 100%; display: block; }
 a { color: var(--indigo); }
 
@@ -48,10 +53,18 @@ a { color: var(--indigo); }
 
 .site-header {
   background: var(--paper);
-  border-bottom: 1px solid var(--line);
   position: sticky;
   top: 0;
   z-index: 20;
+}
+
+/* faixa decorativa geométrica (ver public/assets/kente-strip.svg) —
+   usada com moderação em 3 pontos: cabeçalho, rodapé e certificado */
+.kente-strip {
+  height: 6px;
+  background-image: url('/assets/kente-strip.svg');
+  background-repeat: repeat-x;
+  background-size: 64px 6px;
 }
 
 .nav-bar {
@@ -473,6 +486,8 @@ form { display: grid; gap: 15px; max-width: 580px; }
   margin-top: 10px;
 }
 
+.site-footer .kente-strip { margin-bottom: 28px; }
+
 .site-footer a { color: var(--amber); }
 
 .footer-grid { display: grid; gap: 22px; }
@@ -489,8 +504,8 @@ form { display: grid; gap: 15px; max-width: 580px; }
 body.has-picker { background: var(--indigo); }
 
 .picker {
-  min-height: 82vh;
-  min-height: 82svh; /* altura de viewport "estável" — evita faixa em branco abaixo quando a barra do navegador móvel recolhe/expande */
+  min-height: 100vh;
+  min-height: 100svh; /* altura de viewport "estável" — evita faixa em branco abaixo quando a barra do navegador móvel recolhe/expande */
   display: flex;
   align-items: center;
   background: var(--indigo);
@@ -550,6 +565,12 @@ body.has-picker { background: var(--indigo); }
   background: #fff;
   border: 2px solid var(--amber);
   box-shadow: 0 0 0 6px var(--paper-deep);
+}
+
+.certificate-sheet .kente-strip {
+  margin: -44px -36px 28px;
+  background-size: 48px 8px;
+  height: 8px;
 }
 
 .certificate-sheet-compact { margin-top: 24px; }
