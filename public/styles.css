@@ -207,6 +207,16 @@ a { color: var(--indigo); }
   margin-bottom: 10px;
 }
 
+/* foto de campo no topo da página do módulo — documental, não um banner
+   de stock; mantém a régua âmbar como único acento. */
+.module-hero {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  margin: 4px 0 4px;
+  border-bottom: 3px solid var(--amber);
+}
+
 @media (min-width: 720px) {
   .hero h1 { font-size: 2.6rem; }
 }
@@ -351,6 +361,16 @@ p { max-width: 66ch; }
 }
 
 .mentor:last-child { border-bottom: none; }
+
+.mentor-with-photo { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+
+.mentor-photo {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
 
 .mentor-mark {
   width: 40px;

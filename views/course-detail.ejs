@@ -1,12 +1,26 @@
 <%- include('partials/head', { title: lang === 'pt' ? module_.title_pt : module_.title_en, lang }) %>
 <%- include('partials/nav', { lang, t, user }) %>
 
+<% var moduleImages = {1:'module-1.jpg', 2:'module-2.jpg', 3:'module-3.jpg', 5:'module-5.jpg', 6:'module-6.jpg'}; %>
+<% var moduleImageAlt = {
+  1: { en: 'Mentor and health team talking with a group of pregnant women during a birth-plan discussion.', pt: 'Mentora e equipa de saúde a conversar com um grupo de gestantes durante uma roda sobre plano de parto.' },
+  2: { en: 'Skin-to-skin contact between mother and newborn, supported by the mentor.', pt: 'Contacto pele a pele entre mãe e recém-nascido, com o apoio da mentora.' },
+  3: { en: 'Mentor consulting with a mother and her baby at a maternity unit.', pt: 'Mentora em consulta com uma mãe e o seu bebé numa maternidade.' },
+  5: { en: 'Health worker checking a baby\'s growth during a consultation.', pt: 'Profissional de saúde a avaliar o crescimento de um bebé durante uma consulta.' },
+  6: { en: 'Mentor leading a training workshop with frontline health professionals.', pt: 'Mentora a conduzir um workshop de formação com profissionais de saúde da linha da frente.' }
+}; %>
+
 <section class="hero">
   <div class="container">
     <h1><%= lang === 'pt' ? module_.title_pt : module_.title_en %></h1>
     <% var desc = lang === 'pt' ? module_.description_pt : module_.description_en; %>
     <% if (desc) { %><p><%= desc %></p><% } %>
   </div>
+  <% if (moduleImages[module_.order_index]) { %>
+    <img class="module-hero" src="/assets/<%= moduleImages[module_.order_index] %>"
+      alt="<%= lang === 'pt' ? moduleImageAlt[module_.order_index].pt : moduleImageAlt[module_.order_index].en %>"
+      loading="lazy" decoding="async">
+  <% } %>
 </section>
 
 <section>
