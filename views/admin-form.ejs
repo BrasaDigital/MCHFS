@@ -25,7 +25,7 @@
         </div>
       </div>
 
-      <div class="field-row field-row-2">
+      <div class="field-row field-row-3">
         <div class="field">
           <label for="title_en"><%= t('admin_title_en') %></label>
           <input type="text" id="title_en" name="title_en" value="<%= module_ ? module_.title_en : '' %>" required>
@@ -34,9 +34,13 @@
           <label for="title_pt"><%= t('admin_title_pt') %></label>
           <input type="text" id="title_pt" name="title_pt" value="<%= module_ ? module_.title_pt : '' %>" required>
         </div>
+        <div class="field">
+          <label for="title_fr"><%= t('admin_title_fr') %></label>
+          <input type="text" id="title_fr" name="title_fr" value="<%= module_ ? module_.title_fr : '' %>">
+        </div>
       </div>
 
-      <div class="field-row field-row-2">
+      <div class="field-row field-row-3">
         <div class="field">
           <label for="description_en"><%= t('admin_description_en') %></label>
           <textarea id="description_en" name="description_en"><%= module_ ? module_.description_en : '' %></textarea>
@@ -45,9 +49,13 @@
           <label for="description_pt"><%= t('admin_description_pt') %></label>
           <textarea id="description_pt" name="description_pt"><%= module_ ? module_.description_pt : '' %></textarea>
         </div>
+        <div class="field">
+          <label for="description_fr"><%= t('admin_description_fr') %></label>
+          <textarea id="description_fr" name="description_fr"><%= module_ ? module_.description_fr : '' %></textarea>
+        </div>
       </div>
 
-      <div class="field-row field-row-2">
+      <div class="field-row field-row-3">
         <div class="field">
           <label for="content_en"><%= t('admin_content_en') %></label>
           <textarea id="content_en" name="content_en" style="min-height:160px;"><%= module_ ? module_.content_en : '' %></textarea>
@@ -55,6 +63,10 @@
         <div class="field">
           <label for="content_pt"><%= t('admin_content_pt') %></label>
           <textarea id="content_pt" name="content_pt" style="min-height:160px;"><%= module_ ? module_.content_pt : '' %></textarea>
+        </div>
+        <div class="field">
+          <label for="content_fr"><%= t('admin_content_fr') %></label>
+          <textarea id="content_fr" name="content_fr" style="min-height:160px;"><%= module_ ? module_.content_fr : '' %></textarea>
         </div>
       </div>
 

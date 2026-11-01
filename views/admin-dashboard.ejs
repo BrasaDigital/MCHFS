@@ -16,7 +16,7 @@
       <thead>
         <tr>
           <th><%= t('admin_order') %></th>
-          <th><%= t('admin_title_en') %> / <%= t('admin_title_pt') %></th>
+          <th><%= t('admin_title_en') %> / <%= t('admin_title_pt') %> / <%= t('admin_title_fr') %></th>
           <th><%= t('admin_published') %></th>
           <th></th>
         </tr>
@@ -25,13 +25,13 @@
         <% modules.forEach(function(m) { %>
           <tr>
             <td><%= m.order_index %></td>
-            <td><%= m.title_en %> / <%= m.title_pt %></td>
+            <td><%= m.title_en %> / <%= m.title_pt %> / <%= m.title_fr %></td>
             <td><%= m.published ? '✓' : '—' %></td>
             <td class="admin-table-actions">
               <a href="/admin/modules/<%= m.id %>/edit?lang=<%= lang %>"><%= t('admin_edit') %></a>
               <a href="/admin/modules/<%= m.id %>/quiz?lang=<%= lang %>"><%= t('admin_quiz_manage') %></a>
               <form action="/admin/modules/<%= m.id %>/delete?lang=<%= lang %>" method="post"
-                onsubmit="return confirm('<%= lang === 'pt' ? 'Eliminar este módulo?' : 'Delete this module?' %>');">
+                onsubmit="return confirm('<%= lang === 'pt' ? 'Eliminar este módulo?' : lang === 'fr' ? 'Supprimer ce module ?' : 'Delete this module?' %>');">
                 <button type="submit" class="link-button"><%= t('admin_delete') %></button>
               </form>
             </td>

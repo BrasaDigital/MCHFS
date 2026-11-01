@@ -508,6 +508,10 @@ form { display: grid; gap: 15px; max-width: 580px; }
   .field-row-2 { grid-template-columns: 1fr 1fr; }
 }
 
+@media (min-width: 720px) {
+  .field-row-3 { grid-template-columns: 1fr 1fr 1fr; }
+}
+
 /* ---------- Admin table ---------- */
 
 .admin-table {
