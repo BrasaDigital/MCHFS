@@ -14,7 +14,7 @@
         <p class="certificate-name"><%= attempt.users ? attempt.users.name : '' %></p>
         <p class="certificate-line">
           <%= t('certificate_completed') %>
-          <strong><%= attempt.modules ? (lang === 'pt' ? attempt.modules.title_pt : attempt.modules.title_en) : '' %></strong>
+          <strong><%= attempt.modules ? pick(attempt.modules, 'title') : '' %></strong>
         </p>
         <div class="certificate-meta">
           <div>
@@ -23,7 +23,7 @@
           </div>
           <div>
             <span class="certificate-meta-label"><%= t('certificate_date') %></span>
-            <strong><%= new Date(attempt.created_at).toLocaleDateString(lang === 'pt' ? 'pt-PT' : 'en-GB') %></strong>
+            <strong><%= new Date(attempt.created_at).toLocaleDateString(localeFor(lang)) %></strong>
           </div>
         </div>
       </div>

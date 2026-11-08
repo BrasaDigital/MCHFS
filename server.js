@@ -27,13 +27,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // ---------- idioma (querystring > cookie > padrão) ----------
+const SUPPORTED_LANGS = ['en', 'pt', 'fr'];
 app.use((req, res, next) => {
-  const queryLang = req.query.lang === 'pt' ? 'pt' : req.query.lang === 'en' ? 'en' : null;
+  const queryLang = SUPPORTED_LANGS.includes(req.query.lang) ? req.query.lang : null;
   if (queryLang) {
     res.cookie('lang', queryLang, { maxAge: 1000 * 60 * 60 * 24 * 365 });
   }
-  req.lang = queryLang || req.cookies.lang || 'en';
+  const cookieLang = SUPPORTED_LANGS.includes(req.cookies.lang) ? req.cookies.lang : null;
+  req.lang = queryLang || cookieLang || 'en';
   req.t = translator(req.lang);
+  // helper de views: pega o campo traduzido (title_fr, description_pt, etc.)
+  // com fallback para inglês quando faltar texto num idioma.
+  res.locals.pick = (obj, field) => (obj && (obj[field + '_' + req.lang] || obj[field + '_en'])) || '';
+  res.locals.localeFor = (l) => (l === 'pt' ? 'pt-PT' : l === 'fr' ? 'fr-FR' : 'en-GB');
   next();
 });
 
@@ -97,10 +103,13 @@ function moduleFieldsFromBody(body) {
     order_index: parseInt(body.order_index, 10) || 0,
     title_en: (body.title_en || '').trim(),
     title_pt: (body.title_pt || '').trim(),
+    title_fr: (body.title_fr || '').trim(),
     description_en: (body.description_en || '').trim(),
     description_pt: (body.description_pt || '').trim(),
+    description_fr: (body.description_fr || '').trim(),
     content_en: (body.content_en || '').trim(),
     content_pt: (body.content_pt || '').trim(),
+    content_fr: (body.content_fr || '').trim(),
     youtube_url: (body.youtube_url || '').trim(),
     published: !!body.published,
   };
@@ -114,14 +123,19 @@ function quizFieldsFromBody(body) {
     order_index: parseInt(body.order_index, 10) || 0,
     question_en: (body.question_en || '').trim(),
     question_pt: (body.question_pt || '').trim(),
+    question_fr: (body.question_fr || '').trim(),
     option_a_en: (body.option_a_en || '').trim(),
     option_a_pt: (body.option_a_pt || '').trim(),
+    option_a_fr: (body.option_a_fr || '').trim(),
     option_b_en: (body.option_b_en || '').trim(),
     option_b_pt: (body.option_b_pt || '').trim(),
+    option_b_fr: (body.option_b_fr || '').trim(),
     option_c_en: (body.option_c_en || '').trim(),
     option_c_pt: (body.option_c_pt || '').trim(),
+    option_c_fr: (body.option_c_fr || '').trim(),
     option_d_en: (body.option_d_en || '').trim(),
     option_d_pt: (body.option_d_pt || '').trim(),
+    option_d_fr: (body.option_d_fr || '').trim(),
     correct_option: correct,
   };
 }
@@ -283,7 +297,7 @@ app.get('/certificate/:moduleId', requireLogin, async (req, res) => {
 app.get('/certificate/verify/:code', async (req, res) => {
   const { data: attempt } = await supabase
     .from('quiz_attempts')
-    .select('*, modules(title_en, title_pt), users(name)')
+    .select('*, modules(title_en, title_pt, title_fr), users(name)')
     .eq('certificate_code', req.params.code)
     .maybeSingle();
 

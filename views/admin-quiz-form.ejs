@@ -4,7 +4,7 @@
 <section class="hero">
   <div class="container">
     <h1><%= question ? t('admin_quiz_edit') : t('admin_quiz_new') %></h1>
-    <p class="lead"><%= lang === 'pt' ? module_.title_pt : module_.title_en %></p>
+    <p class="lead"><%= pick(module_, 'title') %></p>
   </div>
 </section>
 
@@ -18,7 +18,7 @@
         <input type="number" id="order_index" name="order_index" value="<%= question ? question.order_index : (nextOrder || 1) %>">
       </div>
 
-      <div class="field-row field-row-2">
+      <div class="field-row field-row-3">
         <div class="field">
           <label for="question_en"><%= t('admin_quiz_question_en') %></label>
           <textarea id="question_en" name="question_en" required><%= question ? question.question_en : '' %></textarea>
@@ -27,10 +27,14 @@
           <label for="question_pt"><%= t('admin_quiz_question_pt') %></label>
           <textarea id="question_pt" name="question_pt" required><%= question ? question.question_pt : '' %></textarea>
         </div>
+        <div class="field">
+          <label for="question_fr"><%= t('admin_quiz_question_fr') %></label>
+          <textarea id="question_fr" name="question_fr"><%= question ? question.question_fr : '' %></textarea>
+        </div>
       </div>
 
       <% ['a','b','c','d'].forEach(function(opt) { %>
-        <div class="field-row field-row-2">
+        <div class="field-row field-row-3">
           <div class="field">
             <label for="option_<%= opt %>_en"><%= t('admin_quiz_option_' + opt + '_en') %></label>
             <input type="text" id="option_<%= opt %>_en" name="option_<%= opt %>_en"
@@ -40,6 +44,11 @@
             <label for="option_<%= opt %>_pt"><%= t('admin_quiz_option_' + opt + '_pt') %></label>
             <input type="text" id="option_<%= opt %>_pt" name="option_<%= opt %>_pt"
                    value="<%= question ? question['option_' + opt + '_pt'] : '' %>" required>
+          </div>
+          <div class="field">
+            <label for="option_<%= opt %>_fr"><%= t('admin_quiz_option_' + opt + '_fr') %></label>
+            <input type="text" id="option_<%= opt %>_fr" name="option_<%= opt %>_fr"
+                   value="<%= question ? question['option_' + opt + '_fr'] : '' %>">
           </div>
         </div>
       <% }); %>
