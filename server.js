@@ -140,6 +140,87 @@ function quizFieldsFromBody(body) {
   };
 }
 
+// ---------- formulário de contacto (site institucional) ----------
+const VISITOR_TYPES = ['front_line', 'government', 'agency', 'professional_body'];
+
+app.post('/contact', async (req, res) => {
+  const b = req.body || {};
+  const visitorType = VISITOR_TYPES.includes(b.visitor_type) ? b.visitor_type : 'front_line';
+  const lang = SUPPORTED_LANGS.includes(b.lang) ? b.lang : 'en';
+  const returnTo = /^(en|pt|fr)\/contact\.html$/.test(b.return_to || '') ? b.return_to : `${lang}/contact.html`;
+
+  let fullName = '';
+  let email = '';
+  let phone = '';
+  let country = '';
+  const details = {};
+
+  if (visitorType === 'government') {
+    fullName = [b.gov_first_name, b.gov_last_name].filter(Boolean).join(' ').trim();
+    email = (b.gov_email || '').trim();
+    phone = (b.gov_phone || '').trim();
+    country = (b.gov_country_name || '').trim();
+    details.department = b.gov_department || '';
+    details.street_address = b.gov_street_address || '';
+    details.street_address_2 = b.gov_street_address_2 || '';
+    details.city = b.gov_city || '';
+    details.state = b.gov_state || '';
+    details.postal_code = b.gov_postal_code || '';
+    details.description = b.gov_description || '';
+  } else if (visitorType === 'agency') {
+    fullName = [b.agency_first_name, b.agency_last_name].filter(Boolean).join(' ').trim();
+    email = (b.agency_email || '').trim();
+    phone = (b.agency_phone || '').trim();
+    country = (b.agency_country || '').trim();
+    details.agency_name = b.agency_name || '';
+    details.street_address = b.agency_street_address || '';
+    details.street_address_2 = b.agency_street_address_2 || '';
+    details.city = b.agency_city || '';
+    details.state = b.agency_state || '';
+    details.postal_code = b.agency_postal_code || '';
+    details.description = b.agency_description || '';
+  } else if (visitorType === 'professional_body') {
+    fullName = [b.body_first_name, b.body_last_name].filter(Boolean).join(' ').trim();
+    email = (b.body_email || '').trim();
+    phone = (b.body_phone || '').trim();
+    country = (b.body_country || '').trim();
+    details.body_name = b.body_name || '';
+    details.street_address = b.body_street_address || '';
+    details.street_address_2 = b.body_street_address_2 || '';
+    details.city = b.body_city || '';
+    details.state = b.body_state || '';
+    details.postal_code = b.body_postal_code || '';
+    details.description = b.body_description || '';
+  } else {
+    fullName = (b['full-name'] || '').trim();
+    email = (b.email || '').trim();
+    phone = (b.whatsapp || '').trim();
+    country = (b.country || '').trim();
+    details.age = b.age || '';
+    details.city = b.city || '';
+    details.native_language = b['native-language'] || '';
+    details.occupation = b.occupation || '';
+    details.workplace = b.workplace || '';
+    details.duties = b.duties || '';
+  }
+
+  try {
+    await supabase.from('contact_submissions').insert({
+      visitor_type: visitorType,
+      full_name: fullName,
+      email,
+      phone,
+      country,
+      lang,
+      details,
+    });
+  } catch (err) {
+    console.error('Erro ao guardar mensagem de contacto:', err.message);
+  }
+
+  res.redirect(`/${returnTo}?sent=1`);
+});
+
 // ---------- rotas de autenticação ----------
 app.get('/login', (req, res) => {
   if (req.user) return res.redirect(`/courses?lang=${req.lang}`);

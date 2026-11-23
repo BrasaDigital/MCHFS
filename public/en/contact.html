@@ -50,63 +50,198 @@
   <div class="container">
     <div class="grid grid-2">
       <div>
-        <form action="#" method="post">
-          <div class="field-row field-row-2">
-            <div class="field">
-              <label for="full-name">Full name</label>
-              <input type="text" id="full-name" name="full-name" required>
-            </div>
-            <div class="field">
-              <label for="age">Age</label>
-              <input type="number" id="age" name="age" min="0">
-            </div>
+        <div id="contact-success" class="contact-success">
+          <strong>Thank you!</strong> Your message has been sent — we'll be in touch soon.
+        </div>
+
+        <form action="/contact" method="post" id="contact-form">
+          <input type="hidden" name="lang" value="en">
+          <input type="hidden" name="return_to" value="en/contact.html">
+
+          <div class="visitor-type-picker">
+            <label class="visitor-type-option">
+              <input type="radio" name="visitor_type" value="front_line" checked>
+              <span>I'm a front-line professional</span>
+            </label>
+            <label class="visitor-type-option">
+              <input type="radio" name="visitor_type" value="government">
+              <span>I'm from a country government</span>
+            </label>
+            <label class="visitor-type-option">
+              <input type="radio" name="visitor_type" value="agency">
+              <span>I'm from an international agency</span>
+            </label>
+            <label class="visitor-type-option">
+              <input type="radio" name="visitor_type" value="professional_body">
+              <span>I'm from a professional body</span>
+            </label>
           </div>
 
-          <div class="field-row field-row-2">
-            <div class="field">
-              <label for="country">Country</label>
-              <input type="text" id="country" name="country">
+          <fieldset class="contact-fieldset is-active" data-type="front_line">
+            <div class="field-row field-row-2">
+              <div class="field">
+                <label for="full-name">Full name</label>
+                <input type="text" id="full-name" name="full-name">
+              </div>
+              <div class="field">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" min="0">
+              </div>
             </div>
-            <div class="field">
-              <label for="city">City</label>
-              <input type="text" id="city" name="city">
-            </div>
-          </div>
 
-          <div class="field-row field-row-2">
-            <div class="field">
-              <label for="native-language">Native language</label>
-              <input type="text" id="native-language" name="native-language">
+            <div class="field-row field-row-2">
+              <div class="field">
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country">
+              </div>
+              <div class="field">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city">
+              </div>
             </div>
-            <div class="field">
-              <label for="occupation">Occupation</label>
-              <input type="text" id="occupation" name="occupation">
-            </div>
-          </div>
 
-          <div class="field">
-            <label for="workplace">Workplace</label>
-            <input type="text" id="workplace" name="workplace">
-          </div>
+            <div class="field-row field-row-2">
+              <div class="field">
+                <label for="native-language">Native language</label>
+                <input type="text" id="native-language" name="native-language">
+              </div>
+              <div class="field">
+                <label for="occupation">Occupation</label>
+                <input type="text" id="occupation" name="occupation">
+              </div>
+            </div>
 
-          <div class="field">
-            <label for="duties">Explain your daily duties</label>
-            <textarea id="duties" name="duties"></textarea>
-          </div>
-
-          <div class="field-row field-row-2">
             <div class="field">
-              <label for="email">E-mail</label>
-              <input type="email" id="email" name="email" required>
+              <label for="workplace">Workplace</label>
+              <input type="text" id="workplace" name="workplace">
+            </div>
+
+            <div class="field">
+              <label for="duties">Explain your daily duties</label>
+              <textarea id="duties" name="duties"></textarea>
+            </div>
+
+            <div class="field-row field-row-2">
+              <div class="field">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email">
+              </div>
+              <div class="field">
+                <label for="whatsapp">WhatsApp</label>
+                <input type="tel" id="whatsapp" name="whatsapp">
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="contact-fieldset" data-type="government" disabled>
+            <div class="field">
+              <label for="gov-country-name">Country name</label>
+              <input type="text" id="gov-country-name" name="gov_country_name" disabled>
             </div>
             <div class="field">
-              <label for="whatsapp">WhatsApp</label>
-              <input type="tel" id="whatsapp" name="whatsapp">
+              <label for="gov-department">Government sector / department</label>
+              <input type="text" id="gov-department" name="gov_department" disabled>
             </div>
-          </div>
+            <div class="field">
+              <label for="gov-street">Street address</label>
+              <input type="text" id="gov-street" name="gov_street_address" disabled>
+            </div>
+            <div class="field">
+              <label for="gov-street-2">Street address line 2</label>
+              <input type="text" id="gov-street-2" name="gov_street_address_2" disabled>
+            </div>
+            <div class="field-row field-row-3">
+              <div class="field"><label for="gov-city">City</label><input type="text" id="gov-city" name="gov_city" disabled></div>
+              <div class="field"><label for="gov-state">State / Province</label><input type="text" id="gov-state" name="gov_state" disabled></div>
+              <div class="field"><label for="gov-postal">Postal / Zip code</label><input type="text" id="gov-postal" name="gov_postal_code" disabled></div>
+            </div>
+            <div class="field-row field-row-2">
+              <div class="field"><label for="gov-first">Contact first name *</label><input type="text" id="gov-first" name="gov_first_name" disabled></div>
+              <div class="field"><label for="gov-last">Contact last name *</label><input type="text" id="gov-last" name="gov_last_name" disabled></div>
+            </div>
+            <div class="field-row field-row-2">
+              <div class="field"><label for="gov-email">Contact e-mail *</label><input type="email" id="gov-email" name="gov_email" placeholder="example@example.com" disabled></div>
+              <div class="field"><label for="gov-phone">Contact phone number *</label><input type="tel" id="gov-phone" name="gov_phone" disabled></div>
+            </div>
+            <div class="field">
+              <label for="gov-description">Brief description — justification to contract the Mentoring Programme, with the number of health facilities and front-line professionals to attend</label>
+              <textarea id="gov-description" name="gov_description" disabled></textarea>
+            </div>
+          </fieldset>
+
+          <fieldset class="contact-fieldset" data-type="agency" disabled>
+            <div class="field">
+              <label for="agency-name">International agency name</label>
+              <input type="text" id="agency-name" name="agency_name" disabled>
+            </div>
+            <div class="field">
+              <label for="agency-country">Country</label>
+              <input type="text" id="agency-country" name="agency_country" disabled>
+            </div>
+            <div class="field">
+              <label for="agency-street">Street address</label>
+              <input type="text" id="agency-street" name="agency_street_address" disabled>
+            </div>
+            <div class="field">
+              <label for="agency-street-2">Street address line 2</label>
+              <input type="text" id="agency-street-2" name="agency_street_address_2" disabled>
+            </div>
+            <div class="field-row field-row-3">
+              <div class="field"><label for="agency-city">City</label><input type="text" id="agency-city" name="agency_city" disabled></div>
+              <div class="field"><label for="agency-state">State / Province</label><input type="text" id="agency-state" name="agency_state" disabled></div>
+              <div class="field"><label for="agency-postal">Postal / Zip code</label><input type="text" id="agency-postal" name="agency_postal_code" disabled></div>
+            </div>
+            <div class="field-row field-row-2">
+              <div class="field"><label for="agency-first">Contact first name *</label><input type="text" id="agency-first" name="agency_first_name" disabled></div>
+              <div class="field"><label for="agency-last">Contact last name *</label><input type="text" id="agency-last" name="agency_last_name" disabled></div>
+            </div>
+            <div class="field-row field-row-2">
+              <div class="field"><label for="agency-email">Contact e-mail *</label><input type="email" id="agency-email" name="agency_email" placeholder="example@example.com" disabled></div>
+              <div class="field"><label for="agency-phone">Contact phone number *</label><input type="tel" id="agency-phone" name="agency_phone" disabled></div>
+            </div>
+            <div class="field">
+              <label for="agency-description">Brief description — justification to contract the Mentoring Programme, with the number of countries and front-line professionals to attend</label>
+              <textarea id="agency-description" name="agency_description" disabled></textarea>
+            </div>
+          </fieldset>
+
+          <fieldset class="contact-fieldset" data-type="professional_body" disabled>
+            <div class="field">
+              <label for="body-name">Professional body name</label>
+              <input type="text" id="body-name" name="body_name" disabled>
+            </div>
+            <div class="field">
+              <label for="body-country">Country</label>
+              <input type="text" id="body-country" name="body_country" disabled>
+            </div>
+            <div class="field">
+              <label for="body-street">Street address</label>
+              <input type="text" id="body-street" name="body_street_address" disabled>
+            </div>
+            <div class="field">
+              <label for="body-street-2">Street address line 2</label>
+              <input type="text" id="body-street-2" name="body_street_address_2" disabled>
+            </div>
+            <div class="field-row field-row-3">
+              <div class="field"><label for="body-city">City</label><input type="text" id="body-city" name="body_city" disabled></div>
+              <div class="field"><label for="body-state">State / Province</label><input type="text" id="body-state" name="body_state" disabled></div>
+              <div class="field"><label for="body-postal">Postal / Zip code</label><input type="text" id="body-postal" name="body_postal_code" disabled></div>
+            </div>
+            <div class="field-row field-row-2">
+              <div class="field"><label for="body-first">Contact first name *</label><input type="text" id="body-first" name="body_first_name" disabled></div>
+              <div class="field"><label for="body-last">Contact last name *</label><input type="text" id="body-last" name="body_last_name" disabled></div>
+            </div>
+            <div class="field-row field-row-2">
+              <div class="field"><label for="body-email">Contact e-mail *</label><input type="email" id="body-email" name="body_email" placeholder="example@example.com" disabled></div>
+              <div class="field"><label for="body-phone">Contact phone number *</label><input type="tel" id="body-phone" name="body_phone" disabled></div>
+            </div>
+            <div class="field">
+              <label for="body-description">Brief description — justification to contract the Mentoring Programme and the number of front-line professionals to attend</label>
+              <textarea id="body-description" name="body_description" disabled></textarea>
+            </div>
+          </fieldset>
 
           <button type="submit" class="btn btn-primary btn-block">Send message</button>
-          <p class="note">This form is a visual draft for now — it is not yet connected to send data anywhere.</p>
         </form>
       </div>
 

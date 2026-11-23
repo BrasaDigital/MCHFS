@@ -512,6 +512,39 @@ form { display: grid; gap: 15px; max-width: 580px; }
   .field-row-3 { grid-template-columns: 1fr 1fr 1fr; }
 }
 
+.visitor-type-picker {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 26px;
+}
+@media (min-width: 640px) {
+  .visitor-type-picker { grid-template-columns: 1fr 1fr; }
+}
+.visitor-type-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  cursor: pointer;
+  background: #fff;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.visitor-type-option input { margin-top: 3px; }
+.visitor-type-option span { font-weight: 600; font-size: 0.95rem; }
+.visitor-type-option:has(input:checked) { border-color: var(--indigo); background: var(--paper-deep); }
+.contact-fieldset { display: none; border: 0; padding: 0; margin: 0; }
+.contact-fieldset.is-active { display: grid; gap: 15px; }
+.contact-success {
+  background: var(--paper-deep);
+  border-left: 4px solid var(--indigo);
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin: 0 0 20px;
+  display: none;
+}
+
 /* ---------- Admin table ---------- */
 
 .admin-table {

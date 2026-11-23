@@ -26,3 +26,35 @@ document.addEventListener('DOMContentLoaded', function () {
     next.addEventListener('click', function () { track.scrollBy({ left: slideWidth(), behavior: 'smooth' }); });
   });
 });
+
+// Formulário de contacto segmentado por tipo de visitante — mostra só o
+// conjunto de campos do tipo escolhido e desativa os restantes (para não
+// serem enviados junto). Também mostra a mensagem de sucesso após o envio.
+document.addEventListener('DOMContentLoaded', function () {
+  var radios = document.querySelectorAll('input[name="visitor_type"]');
+  if (radios.length) {
+    var update = function () {
+      radios.forEach(function (r) {
+        var fs = document.querySelector('.contact-fieldset[data-type="' + r.value + '"]');
+        if (!fs) return;
+        if (r.checked) {
+          fs.classList.add('is-active');
+          fs.querySelectorAll('input, select, textarea').forEach(function (el) { el.disabled = false; });
+        } else {
+          fs.classList.remove('is-active');
+          fs.querySelectorAll('input, select, textarea').forEach(function (el) { el.disabled = true; });
+        }
+      });
+    };
+    radios.forEach(function (r) { r.addEventListener('change', update); });
+    update();
+  }
+
+  if (window.location.search.indexOf('sent=1') !== -1) {
+    var success = document.getElementById('contact-success');
+    if (success) {
+      success.style.display = 'block';
+      success.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+});
