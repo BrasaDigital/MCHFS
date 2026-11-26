@@ -97,6 +97,7 @@ a { color: var(--indigo); }
    o fundo claro do cabeçalho como JPEG pequeno (~13KB) — muito
    mais leve do que o PNG original com transparência. */
 .brand-mark {
+  display: inline-block;
   width: 34px;
   height: 34px;
   border-radius: 50%;
